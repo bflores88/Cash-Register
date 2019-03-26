@@ -1,0 +1,52 @@
+body {
+    background-color: green;
+}
+
+button {
+    padding: 5px;
+}
+
+#bottomCalc {
+    height: 50px;
+    border: 1px solid black;
+    margin: 10px
+}
+
+#calculator {
+    border: 1px solid black;
+    width: 40%;
+}
+
+#display {
+    height: 50px;
+    border: 1px solid black;
+    margin: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: stretch;
+
+}
+
+#calcButtons {
+    margin: 10px;
+}
+
+
+.calcButtonRow {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-bottom: 5px;
+}
+
+.calcButton {
+    padding: 5px 10px;
+    margin: 0px 3px;
+    
+}
+
+
+.equal {
+    padding: 5px 10px;
+}
