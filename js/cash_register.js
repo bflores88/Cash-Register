@@ -1,9 +1,7 @@
 
 var calcMod = calculatorModule();
-console.log(calcMod.load);
 
 var getNums = document.getElementsByClassName('numButt');
-console.log(getNums);
 
 for(var i=0; i<getNums.length; i++){
     getNums[i].addEventListener('click', showNum);
@@ -18,11 +16,11 @@ function showNum(){
     console.log(changeNum);
 
     if(display.innerHTML === "0"){
-        display.innerHTML = changeNum;
+        display.innerHTML = parseInt(changeNum);
         total = display.innerHTML;
     } else {
-        total = total + changeNum;
-        display.innerHTML = total;
+        display.innerHTML = total + changeNum;
+        total = display.innerHTML;
     }
 }
 
@@ -36,7 +34,7 @@ for(var i=0; i<getOps.length; i++){
 function operaNum(){
     calcMod.getOperator(this.value);
     firstOperand = total;
-    console.log('firstNum: ' + calcMod.firstNum(parseInt(firstOperand)));
+    calcMod.firstNum(firstOperand);
     display.innerHTML = 0;
 }
 
@@ -46,7 +44,76 @@ calculate[0].addEventListener('click', calculating);
 
 function calculating(){
     secondOperand = total;
-    total = 0;
+    total = "";
     calcMod.secNum(secondOperand);
     display.innerHTML = calcMod.calculate();
+}
+
+var deci = document.getElementsByClassName('decimal');
+deci[0].addEventListener('click', addDeci);
+
+function addDeci(){
+    display.innerHTML = display.innerHTML + this.value;
+    total = display.innerHTML;
+}
+
+var clr = document.getElementsByClassName('clear');
+clr[0].addEventListener('click', clrDisp);
+
+function clrDisp(){
+    display.innerHTML = 0;
+
+    if(secondOperand !== '0'){
+        secondOperand = 0;
+        calcMod.secNum(0);
+    } else {
+        firstOperand = 0;
+        calcMod.firstNum(0);
+    }
+    total = display.innerHTML;
+}
+
+var cashDep = document.getElementsByClassName('depCash');
+cashDep[0].addEventListener('click', cashDeposit);
+
+function cashDeposit(){
+    total = display.innerHTML;
+    calcMod.load(parseInt(total));
+    console.log('total: ' + calcMod.getTotal())
+    calcMod.cashAction('+');
+    display.innerHTML = '0';
+}
+
+var cashWith = document.getElementsByClassName('withCash');
+cashWith[0].addEventListener('click', cashWithdraw);
+
+function cashWithdraw(){
+    total = display.innerHTML;
+    calcMod.load(parseInt(total));
+    calcMod.cashAction('-');
+    display.innerHTML = '0';
+}
+
+var cashBal = document.getElementsByClassName('getBal');
+cashBal[0].addEventListener('click', dispBal);
+
+function dispBal(){
+    display.innerHTML = calcMod.getCashBal();
+}
+
+var del = document.getElementsByClassName('delete');
+del[0].addEventListener('click', delNum);
+
+function delNum(){
+    var backSpace = display.innerHTML;
+    console.log(backSpace);
+    var removeLast = backSpace.toString().substring(0, backSpace.length-1);
+    console.log(removeLast);
+    if(removeLast === ""){
+        display.innerHTML = '0';
+        total = display.innerHTML;
+    } else {
+        display.innerHTML = parseInt(removeLast);
+        total = display.innerHTML;
+    }
 }

@@ -4,6 +4,7 @@ function calculatorModule(){
     var storeFirstNum = 0;
     var storeSecNum = 0;
     var calc = 0;
+    var cashBal = 0;
 
     function getTotal(x){
         return total;
@@ -44,9 +45,23 @@ function calculatorModule(){
             calc = parseInt(storeFirstNum) + parseInt(storeSecNum);
             return calc;
         } else if (operator === '-'){
-            calc = parseInt(storeFirstNum) - parseInt(storeSecNum);
+            calc = storeFirstNum - storeSecNum;
             return calc;
         }
+    }
+
+    function cashAction(x){
+        if (x === '+'){
+            cashBal = cashBal + total;
+            return cashBal;
+        } else if (x === '-'){
+            cashBal = cashBal - total;
+            return cashBal;
+        }
+    }
+
+    function getCashBal(){
+        return cashBal;
     }
 
 
@@ -57,7 +72,9 @@ function calculatorModule(){
         getOperator: getOperator,
         firstNum: firstNum,
         secNum: secNum,
-        calculate: calculate
+        calculate: calculate,
+        cashAction: cashAction,
+        getCashBal: getCashBal
     }
 
 
