@@ -6,6 +6,12 @@ function calculatorModule(){
     var calc = 0;
     var cashBal = 0;
 
+    const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2
+      })
+
     function getTotal(x){
         return total;
     }
@@ -36,13 +42,13 @@ function calculatorModule(){
 
     function calculate(){
         if(operator === '/'){
-            calc = parseInt(storeFirstNum) / parseInt(storeSecNum);
+            calc = parseFloat(storeFirstNum) / parseFloat(storeSecNum);
             return calc;
         } else if (operator === 'x'){
-            calc = parseInt(storeFirstNum) * parseInt(storeSecNum);
+            calc = parseFloat(storeFirstNum) * parseFloat(storeSecNum);
             return calc;
         } else if (operator === '+'){
-            calc = parseInt(storeFirstNum) + parseInt(storeSecNum);
+            calc = parseFloat(storeFirstNum) + parseFloat(storeSecNum);
             return calc;
         } else if (operator === '-'){
             calc = storeFirstNum - storeSecNum;
@@ -53,15 +59,21 @@ function calculatorModule(){
     function cashAction(x){
         if (x === '+'){
             cashBal = cashBal + total;
+            formatter.format(cashBal);
             return cashBal;
         } else if (x === '-'){
+            if(total > cashBal){
+                return alert('Not enough money brah!');
+            }
             cashBal = cashBal - total;
+            formatter.format(cashBal);
             return cashBal;
         }
     }
 
     function getCashBal(){
-        return cashBal;
+        var daCash = formatter.format(parseFloat(cashBal));
+        return daCash;
     }
 
 

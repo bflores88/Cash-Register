@@ -16,7 +16,7 @@ function showNum(){
     console.log(changeNum);
 
     if(display.innerHTML === "0"){
-        display.innerHTML = parseInt(changeNum);
+        display.innerHTML = parseFloat(changeNum);
         total = display.innerHTML;
     } else {
         display.innerHTML = total + changeNum;
@@ -47,14 +47,24 @@ function calculating(){
     total = "";
     calcMod.secNum(secondOperand);
     display.innerHTML = calcMod.calculate();
+    total = parseFloat(display.innerHTML);
+    calcMod.firstNum(firstOperand);
 }
 
 var deci = document.getElementsByClassName('decimal');
 deci[0].addEventListener('click', addDeci);
 
 function addDeci(){
-    display.innerHTML = display.innerHTML + this.value;
-    total = display.innerHTML;
+    var checkDeci = display.innerHTML;
+    var strDeci = checkDeci.toString()
+    console.log(strDeci);
+    if(strDeci.indexOf('.') === -1){
+        display.innerHTML = display.innerHTML + this.value;
+        total = display.innerHTML;
+    } else {
+        total = display.innerHTML;
+    }
+
 }
 
 var clr = document.getElementsByClassName('clear');
@@ -78,7 +88,7 @@ cashDep[0].addEventListener('click', cashDeposit);
 
 function cashDeposit(){
     total = display.innerHTML;
-    calcMod.load(parseInt(total));
+    calcMod.load(parseFloat(total));
     console.log('total: ' + calcMod.getTotal())
     calcMod.cashAction('+');
     display.innerHTML = '0';
@@ -89,7 +99,7 @@ cashWith[0].addEventListener('click', cashWithdraw);
 
 function cashWithdraw(){
     total = display.innerHTML;
-    calcMod.load(parseInt(total));
+    calcMod.load(parseFloat(total));
     calcMod.cashAction('-');
     display.innerHTML = '0';
 }
@@ -99,6 +109,8 @@ cashBal[0].addEventListener('click', dispBal);
 
 function dispBal(){
     display.innerHTML = calcMod.getCashBal();
+    console.log(calcMod.getCashBal());
+    alert('Cash Balance is ' + display.innerHTML);
 }
 
 var del = document.getElementsByClassName('delete');
@@ -113,7 +125,61 @@ function delNum(){
         display.innerHTML = '0';
         total = display.innerHTML;
     } else {
-        display.innerHTML = parseInt(removeLast);
+        display.innerHTML = parseFloat(removeLast);
         total = display.innerHTML;
     }
+}
+
+var getMenuButtons = document.getElementsByClassName('menuh1');
+
+for(var i=0; i<getMenuButtons.length; i++){
+    getMenuButtons[i].addEventListener('click', showDrinkMenu)
+}
+
+function showDrinkMenu(){
+    var showDMB = document.getElementById('drinkMenuButtons');
+    console.log(showDMB);
+    if(showDMB.style.display === 'block'){
+        showDMB.style.display = 'none';
+    } else {
+        showDMB.style.display = 'block';
+    }
+}
+
+var getDrinkTypes = document.getElementsByClassName('drinkTypes');
+
+for(var i=0; i<getDrinkTypes.length; i++){
+    getDrinkTypes[i].addEventListener('click', showMoar);
+}
+
+function showMoar(){
+    var showBuddons = this.querySelector('div');
+    if(showBuddons.style.display === 'flex'){
+        showBuddons.style.display = 'none';
+    } else {
+        showBuddons.style.display = 'flex'
+    }
+}
+
+
+var getMenuButtons1 = document.getElementsByClassName('menuh2');
+
+for(var i=0; i<getMenuButtons1.length; i++){
+    getMenuButtons1[i].addEventListener('click', showFoodMenu)
+}
+
+function showFoodMenu(){
+    var showDMB = document.getElementById('foodMenuButtons');
+    console.log(showDMB);
+    if(showDMB.style.display === 'block'){
+        showDMB.style.display = 'none';
+    } else {
+        showDMB.style.display = 'block';
+    }
+}
+
+var getFoodTypes = document.getElementsByClassName('foodTypes');
+
+for(var i=0; i<getFoodTypes.length; i++){
+    getFoodTypes[i].addEventListener('click', showMoar);
 }
