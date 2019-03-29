@@ -5,6 +5,9 @@ function calculatorModule(){
     var storeSecNum = 0;
     var calc = 0;
     var cashBal = 0;
+    var tempOrder = 0;
+    var tempTax = 0;
+    var tempTotal = 0;
 
     const formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
@@ -76,6 +79,68 @@ function calculatorModule(){
         return daCash;
     }
 
+    function buildOrder(x){
+        tempOrder = tempOrder + parseFloat(x);
+        console.log(tempOrder);
+        return tempOrder;
+    }
+
+    function updateTax(){
+        tempTax = parseFloat(tempOrder) * .04712;
+        return tempTax
+    }
+
+    function updateTotal(){
+        tempTotal = parseFloat(tempOrder + tempTax).toFixed(2);
+        return tempTotal;
+    }
+
+    function updateModalTtls(){
+        var updateTtlAmt = document.getElementById('subtotal');
+        updateTtlAmt.innerHTML = formatter.format(parseFloat(tempOrder));
+
+        var updateTax = document.getElementById('orderTax');
+        updateTax.innerHTML = formatter.format(parseFloat(tempTax));
+
+        var updateGrandTtl = document.getElementById('orderDue');
+        updateGrandTtl.innerHTML = formatter.format(parseFloat(tempTotal));
+    }
+
+    function deleteItem(x){
+        tempOrder = tempOrder - x;
+        updateTax();
+        updateTotal();
+        updateModalTtls();
+        return tempOrder;
+    }
+
+    function modalUpdate(item, amt){
+
+        var newOrder = document.createElement('div');
+        newOrder.className = 'singleItem';
+        orders.appendChild(newOrder);
+
+        var newItem = document.createElement('div');
+        newItem.className = 'itemDscr';
+        newItem.innerHTML = item;
+        newOrder.appendChild(newItem)
+
+        var newAmt = document.createElement('div');
+        newAmt.className = 'itemAmt';
+        newAmt.innerHTML = parseFloat(amt).toFixed(2);
+        newOrder.appendChild(newAmt)
+
+        updateModalTtls();
+
+    }
+
+    function clearTtls(){
+        tempOrder = 0;
+        updateTax();
+        updateTotal();
+        return tempOrder;
+    }
+
 
 
     return {
@@ -86,7 +151,15 @@ function calculatorModule(){
         secNum: secNum,
         calculate: calculate,
         cashAction: cashAction,
-        getCashBal: getCashBal
+        getCashBal: getCashBal,
+        buildOrder: buildOrder,
+        updateTax: updateTax,
+        updateTotal: updateTotal,
+        deleteItem: deleteItem,
+        modalUpdate: modalUpdate,
+        clearTtls: clearTtls,
+        updateModalTtls: updateModalTtls
+    
     }
 
 

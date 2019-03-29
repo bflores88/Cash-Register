@@ -146,21 +146,6 @@ function showDrinkMenu(){
     }
 }
 
-var getDrinkTypes = document.getElementsByClassName('drinkTypes');
-
-for(var i=0; i<getDrinkTypes.length; i++){
-    getDrinkTypes[i].addEventListener('click', showMoar);
-}
-
-function showMoar(){
-    var showBuddons = this.querySelector('div');
-    if(showBuddons.style.display === 'flex'){
-        showBuddons.style.display = 'none';
-    } else {
-        showBuddons.style.display = 'flex'
-    }
-}
-
 
 var getMenuButtons1 = document.getElementsByClassName('menuh2');
 
@@ -178,8 +163,64 @@ function showFoodMenu(){
     }
 }
 
-var getFoodTypes = document.getElementsByClassName('foodTypes');
+var getMenuButtons2 = document.getElementsByClassName('menuh3');
 
-for(var i=0; i<getFoodTypes.length; i++){
-    getFoodTypes[i].addEventListener('click', showMoar);
+for(var i=0; i<getMenuButtons2.length; i++){
+    getMenuButtons2[i].addEventListener('click', showExtras)
+}
+
+function showExtras(){
+    var showDMB = document.getElementById('extraMenuButtons');
+    console.log(showDMB);
+    if(showDMB.style.display === 'block'){
+        showDMB.style.display = 'none';
+    } else {
+        showDMB.style.display = 'block';
+    }
+}
+
+//menu button click events
+var clckMenu = document.getElementsByClassName('menuButt');
+
+for(var i=0; i<clckMenu.length; i++){
+    clckMenu[i].addEventListener('click', addItem);
+}
+
+function addItem(){
+    calcMod.buildOrder(this.value);
+    calcMod.updateTax();
+    calcMod.updateTotal();
+    calcMod.modalUpdate(this.innerText, this.value);
+}
+
+var removeItem = document.getElementsByClassName('delItem');
+
+removeItem[0].addEventListener('click', deleteLast);
+
+function deleteLast(){
+    var lastTtl = document.getElementsByClassName('itemAmt');
+    var lastAmt = lastTtl[lastTtl.length - 1];
+    calcMod.deleteItem(parseFloat(lastAmt.innerHTML));
+
+    var getLast = document.getElementById('orders');
+    getLast.removeChild(getLast.lastChild)
+
+}
+
+submit.addEventListener('click', popUpStuff);
+
+function popUpStuff(){
+    if (confirm('Did you collect monies?')) {
+        // Save it!
+        while (orders.firstChild) {
+            orders.removeChild(orders.firstChild);
+        }
+        calcMod.clearTtls();
+        calcMod.updateModalTtls();
+
+
+    } else {
+        // Do nothing!
+        alert('Why u nevah do um?')
+    }
 }
