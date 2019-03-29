@@ -149,7 +149,9 @@ function calculatorModule(){
     }
 
     function receivePmt(x){
-        if(x<tempTotal){
+        if (tempTotal == 0){
+            alert('No order entered')
+        } else if (x<tempTotal){
             addPay = parseFloat(tempTotal) - parseFloat(x);
             tempTotal = addPay;
             alert('Please collect ' + addPay + ' more!');

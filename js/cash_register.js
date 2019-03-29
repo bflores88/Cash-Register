@@ -13,7 +13,6 @@ var secondOperand = null;
 
 function showNum(){
     var changeNum = this.value;
-    console.log(changeNum);
 
     if(display.innerHTML === "0"){
         display.innerHTML = parseFloat(changeNum);
@@ -198,6 +197,11 @@ var removeItem = document.getElementsByClassName('delItem');
 removeItem[0].addEventListener('click', deleteLast);
 
 function deleteLast(){
+    var ckTtl = document.getElementById('orderDue');
+    
+    if(ckTtl.innerHTML == "$0.00"){
+        return;
+    } else {
     var lastTtl = document.getElementsByClassName('itemAmt');
     var lastAmt = lastTtl[lastTtl.length - 1];
     calcMod.deleteItem(parseFloat(lastAmt.innerHTML));
@@ -205,6 +209,8 @@ function deleteLast(){
     var getLast = document.getElementById('orders');
     getLast.removeChild(getLast.lastChild)
 
+    }
+    
 }
 
 submitOrder.addEventListener('click', submitForPmt);

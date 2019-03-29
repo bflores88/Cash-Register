@@ -283,11 +283,16 @@ h1 {
         width: 95vw;
     }
 
+    #display {
+        font-size: 6vw;
+    }
+
     .calcButton {
         padding: 5px 10px;
         margin: 0px 3px;
+        height: 40px;
         width: 20%;
-        font-size: 2vw;
+        font-size: 3vw;
     }
 
     .menuContainer .menuButt {
