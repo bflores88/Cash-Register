@@ -95,6 +95,11 @@ function calculatorModule(){
         return tempTotal;
     }
 
+    function cashOrder(){
+        cashBal = cashBal + tempTotal;
+        return cashBal;
+    }
+
     function updateModalTtls(){
         var updateTtlAmt = document.getElementById('subtotal');
         updateTtlAmt.innerHTML = formatter.format(parseFloat(tempOrder));
@@ -158,7 +163,8 @@ function calculatorModule(){
         deleteItem: deleteItem,
         modalUpdate: modalUpdate,
         clearTtls: clearTtls,
-        updateModalTtls: updateModalTtls
+        updateModalTtls: updateModalTtls,
+        cashOrder: cashOrder
     
     }
 

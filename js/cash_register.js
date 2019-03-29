@@ -212,6 +212,7 @@ submit.addEventListener('click', popUpStuff);
 function popUpStuff(){
     if (confirm('Did you collect monies?')) {
         // Save it!
+        calcMod.cashOrder();
         while (orders.firstChild) {
             orders.removeChild(orders.firstChild);
         }
