@@ -155,7 +155,7 @@ function calculatorModule(){
             alert('Please collect ' + addPay + ' more!');
             return addPay;
         } else if (x>tempTotal){
-            changeDue = Math.abs(parseFloat(tempTotal) - parseFloat(x));
+            changeDue = Math.abs(parseFloat(tempTotal) - parseFloat(x)).toFixed(2);
             alert('Change due to customer is ' + changeDue);
             return changeDue;
 
