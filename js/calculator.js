@@ -8,6 +8,8 @@ function calculatorModule(){
     var tempOrder = 0;
     var tempTax = 0;
     var tempTotal = 0;
+    var addPay = 0;
+    var changeDue = 0;
 
     const formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
@@ -146,6 +148,20 @@ function calculatorModule(){
         return tempOrder;
     }
 
+    function receivePmt(x){
+        if(x<tempTotal){
+            addPay = parseFloat(tempTotal) - parseFloat(x);
+            tempTotal = addPay;
+            alert('Please collect ' + addPay + ' more!');
+            return addPay;
+        } else if (x>tempTotal){
+            changeDue = Math.abs(parseFloat(tempTotal) - parseFloat(x));
+            alert('Change due to customer is ' + changeDue);
+            return changeDue;
+
+        }
+    }
+
 
 
     return {
@@ -164,7 +180,8 @@ function calculatorModule(){
         modalUpdate: modalUpdate,
         clearTtls: clearTtls,
         updateModalTtls: updateModalTtls,
-        cashOrder: cashOrder
+        cashOrder: cashOrder,
+        receivePmt: receivePmt
     
     }
 

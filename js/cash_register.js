@@ -207,6 +207,18 @@ function deleteLast(){
 
 }
 
+submitOrder.addEventListener('click', submitForPmt);
+
+function submitForPmt(){
+    alert('Enter payment on screen and hit [PAY] meow');
+}
+
+custPmt.addEventListener('click', collectPmt);
+
+function collectPmt(){
+    calcMod.receivePmt(parseFloat(display.innerHTML));
+};
+
 submit.addEventListener('click', popUpStuff);
 
 function popUpStuff(){
@@ -223,5 +235,6 @@ function popUpStuff(){
     } else {
         // Do nothing!
         alert('Why u nevah do um?')
+        alert('Click [Submit] then enter amt and click [Pay]')
     }
 }
