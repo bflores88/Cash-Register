@@ -98,7 +98,7 @@ function calculatorModule(){
     }
 
     function cashOrder(){
-        cashBal = cashBal + tempTotal;
+        cashBal = parseFloat(cashBal) + parseFloat(tempTotal);
         return cashBal;
     }
 
