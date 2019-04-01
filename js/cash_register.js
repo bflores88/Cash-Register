@@ -140,7 +140,6 @@ for(var i=0; i<getMenuButtons.length; i++){
 
 function showDrinkMenu(){
     var showDMB = document.getElementById('drinkMenuButtons');
-    console.log(showDMB);
     if(showDMB.style.display === 'block'){
         showDMB.style.display = 'none';
     } else {
@@ -157,7 +156,6 @@ for(var i=0; i<getMenuButtons1.length; i++){
 
 function showFoodMenu(){
     var showDMB = document.getElementById('foodMenuButtons');
-    console.log(showDMB);
     if(showDMB.style.display === 'block'){
         showDMB.style.display = 'none';
     } else {

@@ -83,7 +83,6 @@ function calculatorModule(){
 
     function buildOrder(x){
         tempOrder = tempOrder + parseFloat(x);
-        console.log(tempOrder);
         return tempOrder;
     }
 
