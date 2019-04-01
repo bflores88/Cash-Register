@@ -42,6 +42,9 @@ console.log(calculate);
 calculate[0].addEventListener('click', calculating);
 
 function calculating(){
+    if(firstOperand === 0){
+      return parseFloat(display.innerHTML).toFixed(2);
+    }
     secondOperand = total;
     total = "";
     calcMod.secNum(secondOperand);

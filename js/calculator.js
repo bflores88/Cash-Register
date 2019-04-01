@@ -58,7 +58,7 @@ function calculatorModule(){
         } else if (operator === '-'){
             calc = storeFirstNum - storeSecNum;
             return calc;
-        }
+        } else {return;}
     }
 
     function cashAction(x){
